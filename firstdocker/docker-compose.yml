@@ -1,0 +1,22 @@
+services:
+  web:
+    image: nginx:alpine
+    container_name: compose-web
+    ports:
+      - "8081:80"
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
+    restart: always
+
+  db:
+    image: mariadb:10.6
+    container_name: compose-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword123
+      MYSQL_DATABASE: devops_db
+    volumes:
+      - db_stockage:/var/lib/mysql
+    restart: always
+
+volumes:
+  db_stockage:
